@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <!--Busque su emoji en https://www.w3schools.com/html/html_emojis.asp-->
+        <title> Primera Prueba</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <p>
+                    <a href="index.html">Inicio</a>
+                    <a href="page.html">Caleidoscopio</a>
+                    <a href="page2.html"class="activo">Condiciones</a>
+                    <a href="page3.html">Orbit Control</a>
+                    <a href="page4.html">Poema</a>
+            </p>
+            <h1>Condiciones</h1>
+            <h2></h2>
+            <p>Pulse el botón del mouse para generar la intereacción</p>            
+        </header>
+        <aside>
+            <button onclick ="foto()" >Guardar</button>
+            <button onclick = "borra()">Borra</button>
+        </aside>
+        <script>
+// Position variables
+let circlePositionX = 800;
+let circlePositionY = 450;
+
+// Speed variables
+let circleSpeedX = 6;
+let circleSpeedY = 6;
+
+// Radius variable
+let circleRadius = 25;
+
+// Hue variable
+let circleHue = 2;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // Cover canvas with white
+  background('#021f19');
+
+  // Draw ellipses using their radius
+  ellipseMode(RADIUS);
+
+  // Use Hue Saturation Brightness for colors on circle trail
+  colorMode(HSB);
+
+    
+  strokeWeight(4);
+
+  // Create screen reader accessible description
+  describe(
+    'A circle starts in the center of the canvas. When the user holds the mouse down, the circle bounces around the canvas, its inside switches between black and white, and its outline fades between colors, leaving a rainbow trail.'
+  );
+}
+
+function draw() {
+  // Set stroke color using current hue
+  stroke(circleHue, 80, 90);
+
+  // If circle's x position is between 100 and 300
+  if (circlePositionX >= 100 && circlePositionX <= 300) {
+    // Set fill color to black
+    fill(circleHue, 80, 90 );
+
+    // Otherwise
+  } else {
+    // Set fill color to white
+     fill(circleHue, 80, 90 );
+
+  }
+
+  // Draw circle at current position
+  circle(circlePositionX, circlePositionY, circleRadius);
+
+  // If mouse is held down, animate the sketch
+  if (mouseIsPressed === true) {
+    // Add speed to circle's position to make it move
+    circlePositionX = circlePositionX + circleSpeedX;
+    circlePositionY = circlePositionY + circleSpeedY;
+
+    // Increase hue by 1
+    circleHue = circleHue + 1;
+  }
+
+  // If hue has reached maximum value
+  if (circleHue >= 360) {
+    // Reset hue to 0
+    circleHue = 0;
+  }
+
+  // If circle is beyond left or right edge
+  if (
+    circlePositionX < circleRadius ||
+    circlePositionX > width - circleRadius
+  ) {
+    // Reverse horizontal speed
+    circleSpeedX = -circleSpeedX;
+  }
+
+  // If circle is beyond top or bottom edge
+  if (
+    circlePositionY < circleRadius ||
+    circlePositionY > height - circleRadius
+  ) {
+    // Reverse vertical speed
+    circleSpeedY = -circleSpeedY;
+  }
+}
+        function foto (){
+                saveCanvas('Condiciones.jpg');
+            }
+        function borra(){
+                background('#021f19');
+            } 
+        </script>
+    </body>
+</html>

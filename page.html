@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <!--Busque su emoji en https://www.w3schools.com/html/html_emojis.asp-->
+        <title> Primera Prueba</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <p>
+                    <a href="index.html">Inicio</a>
+                    <a href="page.html"class="activo">Caleidoscopio</a>
+                    <a href="page2.html">Condiciones</a>
+                    <a href="page3.html">Orbit Control</a>
+                    <a href="page4.html">Poema</a>
+            </p>
+            <h1>Caleidoscopio</h1>
+            <h2></h2>
+            <p>Dibuja un caleidoscopio mientras haces <code>mouseDragged()</code></p>            
+        </header>
+        <aside>
+            <button onclick ="foto()" >Imprime</button>
+            <button onclick = "borra()">Borra</button>
+        </aside>
+        <script>
+            var saludo = {
+                arriba:["¡Hola mundo!","¡Hola universo!", "¡Hola orbe!", "Hola cabros"],
+                abajo: "Mi nombre es Martin Arrieta",
+            };
+            var titular;
+            var nombre;
+        
+let symmetry = 6;
+
+
+let angle = 360 / symmetry;
+
+function setup() {
+  describe(
+    `Dark grey canvas that reflects the lines drawn within it in ${symmetry} sections.`
+  );
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  background('#021f19');
+}
+
+function draw() {
+
+  translate(width / 2, height / 2);
+
+
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+
+    let lineStartX = mouseX - width / 2;
+    let lineStartY = mouseY - height / 2;
+    let lineEndX = pmouseX - width / 2;
+    let lineEndY = pmouseY - height / 2;
+
+
+    if (mouseIsPressed === true) {
+
+      for (let i = 0; i < symmetry; i++) {
+        rotate(angle);
+        stroke(255);
+        strokeWeight(3);
+        line(lineStartX, lineStartY, lineEndX, lineEndY);
+
+
+        push();
+        scale(1, -1);
+        line(lineStartX, lineStartY, lineEndX, lineEndY);
+        pop();
+      }
+    }
+  }
+}
+        function foto (){
+                saveCanvas('Caledoscopio.jpg');
+            }
+        function borra(){
+                background('#021f19');
+            }
+        </script>
+    </body>
+</html>
